@@ -1,6 +1,6 @@
 const path = require('path');
 import { createConnection } from 'typeorm';
-import { attacks } from '../../../models/entities/attacks';
+import { Attacks } from '../../../models/entities/attacks';
 import { PokemonEvolution } from '../../../models/entities/evolutions';
 import { PokemonPreviousEvolution } from '../../../models/entities/previousEvolutions';
 import { Pokemon } from '../../../models/entities/pokemon';
@@ -15,12 +15,12 @@ export const databaseInitializer = async () => {
         port     : 5432,
         username : 'kandarp',
         password : '',
-        database : 'pokemon_details',
+        database : 'pokemons',
         entities: [
           Pokemon,
           PokemonEvolution,
           PokemonPreviousEvolution,
-          attacks
+          Attacks
         ],
         logging: ['query', 'error'],
         synchronize: true,

@@ -1,8 +1,10 @@
 import App from './app';
 import SampleRoutes from './controllers/Sample/index';
+import { databaseInitializer } from './controllers/Sample/services/initializeDatabase';
 
 async function main() {
   const app = new App([new SampleRoutes()]);
+  await databaseInitializer();
   app.listen();
 }
 

@@ -2,7 +2,7 @@ import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, JoinColumn} from 'ty
 import { Pokemon } from './pokemon';
 
 @Entity('attacks')
-export class attacks {
+export class Attacks {
 
   @PrimaryGeneratedColumn()
   id: number;

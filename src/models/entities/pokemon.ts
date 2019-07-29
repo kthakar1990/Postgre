@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 import { PokemonEvolution } from './evolutions';
 import { PokemonPreviousEvolution } from './previousEvolutions';
-import { attacks } from './attacks';
+import { Attacks } from './attacks';
 
 @Entity('pokemon')
 export class Pokemon {
@@ -38,12 +38,18 @@ export class Pokemon {
  	@Column("int")
  	maxHP: number;
 
-	@OneToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon)
+	@OneToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon, {
+		cascade: true,
+})
 	evolution: PokemonEvolution;
 
-	@OneToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon)
+	@OneToMany(type => PokemonPreviousEvolution, pokemonPreviousEvolution => pokemonPreviousEvolution.pokemon, {
+		cascade: true,
+})
 	previousEvolution: PokemonPreviousEvolution;
 
-	@OneToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon)
-	attacks: attacks;
+	@OneToMany(type => Attacks, attacks => attacks.pokemon, {
+		cascade: true,
+})
+	attacks: Attacks;
 }
