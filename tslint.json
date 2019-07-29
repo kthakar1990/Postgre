@@ -1,0 +1,12 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-floating-promises": true,
+    "strict-boolean-expressions": true,
+    "semicolon": [true]
+  },
+  "rulesDirectory": []
+}
