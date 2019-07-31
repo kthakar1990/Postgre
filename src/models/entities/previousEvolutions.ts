@@ -1,4 +1,4 @@
-import { Entity, Column, JoinColumn, PrimaryColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToMany } from 'typeorm';
 import { Pokemon } from './pokemon';
 
 @Entity('previousEvolutions')
@@ -9,7 +9,6 @@ export class PokemonPreviousEvolution {
 	@Column("text")
 	name: string;
 
-	@ManyToOne(type => Pokemon, pokemon => pokemon.previousEvolution)
-	@JoinColumn()
-	pokemon: Pokemon;
+	@ManyToMany(type => Pokemon, pokemon => pokemon['previousEvolution'])
+	pokemon: Pokemon[];
 }

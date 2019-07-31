@@ -1,30 +1,36 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToMany, JoinTable } from 'typeorm';
 import { PokemonEvolution } from './evolutions';
 import { PokemonPreviousEvolution } from './previousEvolutions';
 import { Attacks } from './attacks';
 
 @Entity('pokemon')
 export class Pokemon {
-	@PrimaryColumn()
-	id: number;
+		@PrimaryColumn()
+		id: number;
 
-	@Column("text")
-	name: string;
+		@Column("text")
+		name: string;
 
-	@Column("text")
-	classification: string;
+		@Column("text")
+		classification: string;
 
-	@Column("text[]")
-	types: string;
+		@Column("text", {array: true})
+		types: string[];
 
-	@Column("text[]")
-	resistant: string;
+		@Column("text", {array: true})
+		resistant: string[];
 
-	@Column("text[]")
-	weakness: string;
+		@Column("text", {array: true})
+		weakness: string[];
 
-	@Column("float4")
-	fleeRate: number;
+		@Column("float4")
+		fleeRate: number;
+
+		@Column("text")
+		minWeight: string;
+
+		@Column("text")
+		maxWeight: string;
 
  	@Column("text")
  	minHeight: string;
@@ -36,20 +42,38 @@ export class Pokemon {
  	maxCP: number;
 
  	@Column("int")
- 	maxHP: number;
+		maxHP: number;
+		
+		@Column("text", { nullable: true })
+		evolutionReqName: string;
 
-	@OneToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon, {
-		cascade: true,
-})
-	evolution: PokemonEvolution;
+		@Column("int", { nullable: true })
+		evolutionReqAmount: number;
 
-	@OneToMany(type => PokemonPreviousEvolution, pokemonPreviousEvolution => pokemonPreviousEvolution.pokemon, {
-		cascade: true,
-})
-	previousEvolution: PokemonPreviousEvolution;
+		@Column("text", {nullable: true})
+		"Pokémon Class": string;
 
-	@OneToMany(type => Attacks, attacks => attacks.pokemon, {
-		cascade: true,
-})
-	attacks: Attacks;
+		@Column("text", {nullable: true})
+		MYTHIC: string;
+
+		@Column("text", {nullable: true})
+		LEGENDARY: string;
+
+	@ManyToMany(type => PokemonEvolution, pokemonEvolution => pokemonEvolution.pokemon, {
+		cascade: true
+	})
+	@JoinTable()
+	evolution: PokemonEvolution[];
+
+	@ManyToMany(type => PokemonPreviousEvolution, pokemonPreviousEvolution => pokemonPreviousEvolution.pokemon, {
+		cascade: true
+	})
+	@JoinTable()
+	previousEvolution: PokemonPreviousEvolution[];
+
+	@ManyToMany(type => Attacks, attacks => attacks.pokemon, {
+		cascade: true
+	})
+	@JoinTable()
+	attacks: Attacks[];
 }

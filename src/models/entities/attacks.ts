@@ -1,17 +1,13 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, JoinColumn} from 'typeorm';
+import { Entity, Column, ManyToMany, PrimaryColumn} from 'typeorm';
 import { Pokemon } from './pokemon';
 
 @Entity('attacks')
 export class Attacks {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn("text")
+  name: string;
 
   @Column("text")
   category: string;
-
-  @Column("text")
-  name: string;
 
   @Column("text")
   type: string;
@@ -19,7 +15,6 @@ export class Attacks {
   @Column("int")
   damage: number;
 
-  @ManyToOne(type => Pokemon, pokemon => pokemon.attacks)
-	@JoinColumn()
-	pokemon: Pokemon;
+  @ManyToMany(type => Pokemon, pokemon => pokemon.attacks)
+    pokemon: Pokemon[];
 }
