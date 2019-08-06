@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany, PrimaryColumn} from 'typeorm';
+import { Entity, Column, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Pokemon } from './pokemon';
 
 @Entity('attacks')
