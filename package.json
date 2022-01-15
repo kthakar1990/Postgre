@@ -86,7 +86,7 @@
     "concurrently": "^3.5.1",
     "jest": "*",
     "nodemon": "^1.18.10",
-    "shelljs": "^0.8.1",
+    "shelljs": "^0.8.5",
     "ts-jest": "*",
     "ts-node": "*",
     "tslint": "^5.9.1",
